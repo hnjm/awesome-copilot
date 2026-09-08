@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-09-08
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -527,6 +527,10 @@ You can also press **x** on a highlighted session in the session picker (`--resu
 
 In the session picker, press **`s`** to cycle the sort order: relevance, last used, created, or name. The picker also shows the branch name and idle/in-use status for each session.
 
+**Sessions Sidebar sort order** *(v1.0.83+)*: The split Sessions sidebar supports the same **Recent**, **Created**, **Name**, and classic **None** sort orders as the picker. Your selected order is saved and persists across restarts, so you don't need to re-select it every time you open the sidebar.
+
+**Windows taskbar presence** *(v1.0.83+)*: On Windows 11, running Copilot sessions show up in the taskbar with live hover status cards, so you can check session status without switching windows. Disable this with `/settings taskbarPresence false` if you don't want sessions surfaced there — loader-managed sessions apply the change immediately, while standalone sessions need a manual restart.
+
 **Sessions Sidebar and Tab** *(v1.0.76+)*: The Sessions Sidebar is a persistent panel for managing multiple concurrent sessions — switch between them, spawn new ones, and see their status at a glance, all without leaving your current session. As of v1.0.79, the Sessions Sidebar has graduated from experimental and is available by default alongside a dedicated **Sessions tab**. Enable or customize it in `/settings`:
 
 ```
@@ -836,6 +840,10 @@ These flags apply only to the current invocation — your persisted sandbox pref
 > **Breaking change (v1.0.79)**: The setting was renamed from `allowDevToolCaches` to `allowDevToolAccess`. If you previously set `allowDevToolCaches` to `false` to opt out, update your `settings.json` to use `allowDevToolAccess` — the old key is silently ignored.
 
 **Sandbox auth settings** *(v1.0.79-8+, breaking change)*: The `/sandbox` configuration dialog now groups git, `gh`, and (on macOS) keychain settings under a new **Auth** tab. The underlying settings keys moved from `sandbox.gitAuth`/`sandbox.ghAuth` to `sandbox.auth.git`/`sandbox.auth.gh`. There is no automatic migration — the old keys are silently ignored in settings files, and SDK requests that still send them are rejected as invalid. Update any saved configuration to the new key names.
+
+> **Breaking change (v1.0.81)**: On macOS and Linux, sandboxed shell commands can no longer reach services running on your own machine, including a server the command itself starts on `127.0.0.1`. This means test suites that bind a local port will fail inside the sandbox by default. Turn on **Allow local network** in `/sandbox` to restore access to localhost. Linux sandboxing also requires `slirp4netns`, `nsenter`, `iptables`, `ip6tables`, `iptables-restore`, and `ip6tables-restore` on `PATH` — install them if sandboxed commands start failing to launch. When proxy mode is configured, Linux sandboxes further restrict network egress to the configured proxy, which requires `slirp4netns`, `util-linux` 2.35+, `iptables`, and `/dev/net/tun` access.
+
+**Sandbox mTLS support** *(v1.0.83+)*: The sandbox now supports automatic HTTPS proxy mTLS client certificate presentation for model and web requests, useful in enterprise environments that require mutual TLS on the proxy path.
 
 **`worktreeBaseRef` setting** *(v1.0.79-8+)*: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three now default to `HEAD`; previously `--worktree` defaulted to starting from the remote default branch. Set this in `/settings` if you want worktrees to branch from the remote default instead.
 

@@ -3,7 +3,7 @@ title: 'Building Custom Agents'
 description: 'Learn how to create specialized GitHub Copilot agents with custom personas, tool integrations, and domain expertise.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-08-09
+lastUpdated: 2026-09-08
 estimatedReadingTime: '10 minutes'
 tags:
   - agents
@@ -84,6 +84,20 @@ reasoningEffort: high
 tools: ['codebase', 'terminal', 'github']
 ---
 ```
+
+**model** *(v1.0.83+)*: You can also list several models, tried in order until one is available to you — useful as a fallback chain when your preferred model is rate-limited or temporarily unavailable:
+
+```yaml
+---
+name: 'Security Reviewer'
+description: 'Thorough security audit for OWASP vulnerabilities'
+model: [Claude Sonnet 5, Claude Sonnet 4, GPT-5.6]
+model-policy: required
+tools: ['codebase', 'terminal', 'github']
+---
+```
+
+**model-policy** *(v1.0.83+)*: Set to `required` to keep the user's model selection pinned to the agent's declared `model` list for the entire session, preventing the model from being changed away from that list mid-conversation.
 
 **tools** (recommended): An array of built-in tools and MCP servers the agent can access. Common tools include:
 
