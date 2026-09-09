@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-09-09
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -388,6 +388,12 @@ Settings file: `.vscode/settings.json` or global user settings
 }
 ```
 
+**Automations (Preview)** *(VS Code 1.137+)*: Enable `chat.automations.enabled` to schedule recurring agent tasks — hourly, daily, or weekly — directly from the Agents window, or run them on demand. Start from a built-in template (catching up on changes, triaging issues, finding bugs) or define your own prompt and schedule. This is a VS Code-native counterpart to [automations in the GitHub Copilot app](../using-automations-in-copilot-app/).
+
+**Agent Host** *(VS Code 1.136+)*: The agent host lets you connect to the same agent session from multiple VS Code windows. It runs agent harnesses in a dedicated process based on the Agent Host Protocol (AHP), and its Copilot agent is powered by the [Copilot SDK](https://www.npmjs.com/package/@github/copilot-sdk) — aligning behavior with the Copilot CLI, the standalone Copilot app, and other Copilot products.
+
+**Voice Mode (Experimental)** *(VS Code 1.137+)*: Enable `agents.voice.enabled` to have a spoken conversation with an agent while it works — interrupt or redirect it by speaking or using the push-to-talk shortcut. Administrators can disable Voice Mode by turning off Copilot preview features for their organization.
+
 ### Visual Studio
 
 Settings: Tools → Options → GitHub Copilot
@@ -438,6 +444,12 @@ CLI settings use **camelCase** naming. Key settings added in recent releases:
 
 > **Piping an auth token (v1.0.81+)**: Use `copilot login --with-token` to read an authentication token from stdin instead of going through the interactive browser or device-code flow — useful for scripted or containerized setups where a token is already available in the environment.
 
+> **Enterprise sign-in restrictions (v1.0.83+)**: Enterprise administrators can pin sign-in to a list of approved GitHub organizations using the `forceLoginOrgs` managed setting, preventing users from authenticating with personal or unapproved accounts.
+
+> **HTTPS proxy client certificates (v1.0.83+)**: The CLI now supports automatic mTLS client certificate authentication for model and web requests routed through an HTTPS proxy, in addition to the existing `proxy` setting.
+
+> **Sandboxed `gh` authentication (v1.0.83+)**: Sandboxed `gh` commands now authenticate using the account configured for the repository instead of always falling back to the Copilot CLI login, so sandboxed GitHub operations behave consistently with your repository's configured identity.
+
 In addition to the main config file, GitHub Copilot CLI reads two optional per-project files for repository-specific overrides:
 
 - `.claude/settings.json` — committed project settings
@@ -457,7 +469,7 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 
 **Auto mode and server-side model routing** (v1.0.43+): When you select **Auto** as your model, the CLI uses server-side model routing for real-time model selection. Instead of locking in a single model at session start, Auto mode evaluates each request and routes it to the most appropriate model dynamically. This means straightforward questions can be handled by a faster model while complex reasoning tasks are automatically escalated — without you needing to switch models manually.
 
-**Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, **Grok 4.5** (v1.0.76+) from xAI, and **Gemini 3.7 Flash** (v1.0.81+). **Grok 4.6** (v1.0.81+) also gains support for the `xhigh` reasoning effort level, one step above `high`, for the most demanding reasoning tasks.
+**Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, **Grok 4.5** (v1.0.76+) from xAI, **Gemini 3.7 Flash** (v1.0.81+), and **claude-fable-5.1** (v1.0.83+). **Grok 4.6** (v1.0.81+) also gains support for the `xhigh` reasoning effort level, one step above `high`, for the most demanding reasoning tasks.
 
 **Plan mode model** *(v1.0.74+)*: When using plan mode (which blocks file mutations and keeps changes in a planning phase), you can assign a *separate* model specifically for planning — different from your regular session model. This lets you use a fast, cost-effective model for plan drafting while keeping a more capable model on standby for the implementation phase:
 
@@ -534,6 +546,10 @@ In the session picker, press **`s`** to cycle the sort order: relevance, last us
 ```
 
 With the sidebar open, you can see all running and backgrounded sessions in a split-view panel alongside your active conversation. Sessions are listed with their name, working directory, and running status. Click or keyboard-navigate (arrow keys, **n** to spawn, **x** twice to close) to switch sessions instantly. Use this when you regularly juggle several parallel workstreams and want a persistent view of all your sessions rather than accessing them through the `/resume` picker.
+
+**Additional sort orders (v1.0.83+)**: The split Sessions sidebar supports **Recent**, **Created**, **Name**, and the classic **None** sorting, with your selected order remembered across CLI restarts.
+
+> **Windows taskbar integration (v1.0.83+)**: On Windows 11, running Copilot CLI sessions appear in the taskbar with live hover status cards, so you can check session progress without switching back to the terminal window.
 
 The `/rewind` command opens a timeline picker that lets you roll back the conversation to any earlier point in history. You can also trigger it by pressing **double-Esc**:
 

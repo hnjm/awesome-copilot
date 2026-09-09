@@ -3,7 +3,7 @@ title: 'GitHub Copilot Terminology Glossary'
 description: 'A quick reference guide defining common GitHub Copilot and platform-specific terms.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-02
+lastUpdated: 2026-09-09
 estimatedReadingTime: '8 minutes'
 tags:
   - glossary
@@ -258,6 +258,18 @@ A feature available in both the GitHub Copilot app and VS Code's Agents window (
 **Learn more**: [Getting Started with the GitHub Copilot app](../github-copilot-app/)
 
 **Related terms**: [Coding Agent](#coding-agent), [Agent](#agent)
+
+---
+
+### Agent Host
+
+A dedicated process in VS Code (v1.136+) that runs agent harnesses based on the open Agent Host Protocol (AHP), letting you connect to the same agent session from multiple VS Code windows. Its Copilot agent is powered by the [Copilot SDK](https://www.npmjs.com/package/@github/copilot-sdk), aligning behavior with the Copilot CLI, the standalone Copilot app, and other Copilot products.
+
+**When to use**: When you want a consistent agent session shared across multiple editor windows instead of a session tied to a single window.
+
+**Learn more**: [Copilot Configuration Basics](../copilot-configuration-basics/)
+
+**Related terms**: [Agent](#agent), [Coding Agent](#coding-agent)
 
 ---
 
