@@ -3,7 +3,7 @@ title: 'Getting Started with the GitHub Copilot app'
 description: 'Learn about the GitHub Copilot app, a desktop experience built for agent-native development. Understand its key features and who it''s for.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-02
+lastUpdated: 2026-09-10
 estimatedReadingTime: '8 minutes'
 tags:
   - copilot-app
@@ -108,6 +108,10 @@ Agent Merge also understands **stacked pull requests**: it shows a stack summary
 ### Requesting Code Reviews
 
 From the app, you can request a Copilot code review on a pull request—and re-request a review even from reviewers who already responded—without leaving the session. This keeps the review loop inside the same workspace where the change was made.
+
+### Setting a Persistent Goal for Autopilot
+
+The **`/goal` command** *(v1.1.15+)* lets you set a persistent objective for autopilot to work towards in a local session. Instead of re-explaining the target outcome after every message, the goal stays attached to the session and is shown as a pill in the composer with live status (Active, Paused, Done)—expandable to show the objective, completion summary, and AI Credits usage.
 
 ## Who is the Copilot app for?
 

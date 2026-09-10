@@ -3,7 +3,7 @@ title: "Using Automations in the GitHub Copilot app"
 description: "A practical guide to getting started with Copilot app automations using templates, iterative refinement, and real-world examples."
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-06-17
+lastUpdated: 2026-09-10
 estimatedReadingTime: "10 minutes"
 tags:
   - copilot-app
@@ -108,3 +108,5 @@ Use these as patterns, then tailor them to your own repo, rituals, and communica
 ## Next step
 
 Open **Automations**, pick one template, and convert one recurring task you currently do manually into a daily run. That single win usually makes the next automation obvious.
+
+> **Note**: VS Code's Agents window also has an **Automations (Preview)** feature *(v1.137+)*, built on the same underlying concept (scheduled or on-demand agent tasks from a template or custom prompt). Enable it with `chat.automations.enabled` if you'd rather manage automations from your editor instead of the Copilot app.

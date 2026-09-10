@@ -3,7 +3,7 @@ title: 'GitHub Copilot Terminology Glossary'
 description: 'A quick reference guide defining common GitHub Copilot and platform-specific terms.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-02
+lastUpdated: 2026-09-10
 estimatedReadingTime: '8 minutes'
 tags:
   - glossary
@@ -258,6 +258,30 @@ A feature available in both the GitHub Copilot app and VS Code's Agents window (
 **Learn more**: [Getting Started with the GitHub Copilot app](../github-copilot-app/)
 
 **Related terms**: [Coding Agent](#coding-agent), [Agent](#agent)
+
+---
+
+### Automation
+
+A recurring agent task that runs on a schedule (hourly, daily, or weekly) or on demand, instead of being started manually each time. Available as **Automations** in the GitHub Copilot app and as **Automations (Preview)** in VS Code's Agents window *(v1.137+, behind `chat.automations.enabled`)*. Automations can run as a plan, an interactive session, or on autopilot, and start from built-in templates (issue triage, nightly test fixes, release notes) or a custom prompt.
+
+**Example**: A daily automation that pulls open pull requests via `gh api`, filters to updates from the last 24 hours, and posts a concise summary.
+
+**When to use**: For routine, repeatable work—triage, status reporting, recurring maintenance—that you would otherwise have to kick off by hand every time.
+
+**Learn more**: [Using Automations in the GitHub Copilot app](../using-automations-in-copilot-app/)
+
+**Related terms**: [Agent](#agent), [Coding Agent](#coding-agent)
+
+---
+
+### Agent Host
+
+The VS Code component *(v1.137+)* that lets you connect to the same agent session from multiple VS Code windows. It runs agent harnesses in a dedicated process based on the open **Agent Host Protocol (AHP)**, and its Copilot agent is powered by the **Copilot SDK**—the same SDK that underlies Copilot CLI and the standalone GitHub Copilot app—so agent behavior stays consistent across those surfaces.
+
+**When to use**: When you want a single running agent session to be reachable from more than one VS Code window, or when you're building tooling against the Agent Host Protocol.
+
+**Related terms**: [Agent](#agent), [Coding Agent](#coding-agent)
 
 ---
 
