@@ -3,7 +3,7 @@ title: 'Understanding MCP Servers'
 description: 'Learn how Model Context Protocol servers extend GitHub Copilot with access to external tools, databases, and APIs.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-08-28
+lastUpdated: 2026-09-12
 estimatedReadingTime: '8 minutes'
 tags:
   - mcp
@@ -215,6 +215,8 @@ Some MCP servers require authentication to connect to protected resources. GitHu
 
 > **Tip**: If your MCP server uses OAuth with Dynamic Client Registration but hosts its authorization metadata at a non-standard URL (as some enterprise servers like Atlassian Rovo do), Copilot CLI handles this automatically.
 
+> **Client ID Metadata Document (CIMD) support** *(v1.0.83+)*: For MCP servers that support the CIMD standard, Copilot CLI can sign in using a hosted client metadata document instead of requiring manual OAuth client registration, simplifying setup for servers that adopt this approach.
+
 ## How Agents Use MCP Tools
 
 When an agent declares an MCP server in its `tools` array, Copilot can invoke that server's capabilities during conversation:
@@ -318,6 +320,8 @@ For example, a PostgreSQL server that can't connect because `DATABASE_URL` is no
 You can also open the `/mcp` manager while the agent is working to toggle servers on or off mid-turn. Add, edit, delete, and re-auth actions wait until the turn finishes, but enabling or disabling a server takes effect immediately.
 
 **Toggling servers on and off** (v1.0.66+): From the `/mcp` list view, you can **enable or disable individual MCP servers** without editing your config file. Select a server in the list and toggle it — disabled servers won't start in future sessions and their tools won't be available to agents. This is useful for temporarily disabling a server that's causing slowdowns or errors without removing it from your configuration entirely.
+
+> **CLI enable/disable commands** *(v1.0.84+)*: You can also toggle servers from the terminal with `copilot mcp enable <name>` and `copilot mcp disable <name>`, replacing the older `copilot plugins enable/disable --mcp` form. The equivalent commands for other component kinds are `copilot plugin enable/disable` and `copilot skill enable/disable`.
 
 **Common causes and fixes**:
 
