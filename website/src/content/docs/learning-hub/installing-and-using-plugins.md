@@ -3,7 +3,7 @@ title: 'Installing and Using Plugins'
 description: 'Learn how to find, install, and manage plugins that extend GitHub Copilot CLI with reusable agents, skills, hooks, and integrations.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-09-13
 relatedArticles:
   - ./building-custom-agents.md
   - ./creating-effective-skills.md
@@ -236,6 +236,8 @@ copilot plugin uninstall my-plugin
 ```
 
 > **Auto-update for first-party plugins** *(v1.0.78+)*: Plugins sourced from the official `copilot-plugins` marketplace automatically update to their latest version at the start of each session. You do not need to run `copilot plugin update` for first-party plugins — updates are applied silently on startup. Community plugins from `awesome-copilot` and other marketplace registries still require a manual `copilot plugin update` command.
+
+> **CLI command restructuring (v1.0.84+)**: `copilot plugins list` is now an alias of `copilot plugin list` and reports only plugins — no longer MCP servers, skills, instructions, or LSP servers. Its `--json` output changed from the cross-kind `{ plugins, errors }` object to a flat array of plugins; update any scripts that read `.plugins` from that output. The cross-kind `--kind`, `--scope`, `--mcp`, and `--skill` flags have been removed from `copilot plugins`; use `copilot mcp` and `copilot skill` instead. New dedicated commands `copilot instruction list` and `copilot lsp list` replace `copilot plugins list --kind instruction` and `--kind lsp`. `copilot plugins install --skill [--scope project]` is replaced by `copilot skill add [--project]` — the `--scope` spelling is gone. `enable` and `disable` subcommands are now available directly on `copilot plugin`, `copilot mcp`, and `copilot skill`, replacing `copilot plugins enable/disable --plugin|--mcp|--skill`. `--json` is also now available on `copilot plugin list`, `copilot plugin marketplace list`, and `copilot plugin marketplace browse`.
 
 ### Enabling and Disabling Plugin Components
 
