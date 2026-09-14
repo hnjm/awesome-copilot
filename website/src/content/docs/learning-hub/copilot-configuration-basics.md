@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-09-14
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -415,6 +415,8 @@ Configuration file: `~/.copilot-cli/config.json`
 }
 ```
 
+> **Vim mode (v1.0.84+)**: In addition to the external `editor` setting, the CLI now has its own built-in modal editing mode for the composer. Toggle it in-session with `/vim`, or set `editorMode` to `vim` in `/settings` to enable it by default — the current mode (normal/insert) is shown while you type.
+
 CLI settings use **camelCase** naming. Key settings added in recent releases:
 
 | Setting | Description |
@@ -431,8 +433,14 @@ CLI settings use **camelCase** naming. Key settings added in recent releases:
 | `stayInAutopilot` | Keep the CLI in autopilot mode after an autopilot task completes, instead of returning to interactive mode (v1.0.69+) |
 | `defaultMode` | Startup mode for new interactive sessions (e.g., `interactive`, `autopilot`, `plan`) (v1.0.81+) |
 | `defaultPermissionMode` | Default approval behaviour for new interactive sessions, independent from `defaultMode` (v1.0.81+) |
+| `editorMode` | Set to `vim` to enable modal (Vim-style) editing in the composer; also toggled with `/vim` (v1.0.84+) |
+| `pinnedPrompts` | Pin the current prompt to the top of the transcript while it runs; off by default (v1.0.84+) |
+| `taskbarPresence` | Set to `false` to disable showing running sessions in the Windows 11 taskbar (v1.0.84+) |
+| `worktreeBaseRef` | Controls whether `/worktree`, `/worktree new`, and `--worktree` branch from `HEAD` or the remote default branch; defaults to `HEAD` (v1.0.79-8+) |
 
 > **Note**: Older snake_case names (e.g., `include_gitignored`, `auto_updates_channel`) are still accepted for backward compatibility, but camelCase is now the preferred format.
+
+> **New (v1.0.84+)**: Run `/config` to open a sidebar configuration screen directly inside the CLI, instead of hand-editing `~/.copilot-cli/config.json` for common settings changes.
 
 > **Session restore after a crash (v1.0.81+)**: If the CLI is interrupted unexpectedly — a crash or a machine restart — startup now offers to restore any sessions that were still open, so you don't have to reopen each terminal by hand.
 
@@ -585,7 +593,9 @@ In v1.0.66+, you can pass a task description to `/worktree` to name the branch f
 
 This creates a branch named from your task description and begins working on it immediately, making it easy to spin up parallel work without stopping to think of a branch name.
 
-After the command runs, the session is inside the new worktree. Use this when you want to work on a second task in parallel without stashing changes or opening a new terminal. In v1.0.64+ you can also use the experimental `--worktree` flag at startup (`copilot -w [name]`) to create or reuse a worktree under `<repo>.worktrees/` before the session begins.
+After the command runs, the session is inside the new worktree. Use this when you want to work on a second task in parallel without stashing changes or opening a new terminal. You can also use the `--worktree` flag at startup (`copilot -w [name]`) to create or reuse a worktree under `<repo>.worktrees/` before the session begins.
+
+> **Graduated from experimental (v1.0.84+)**: `/worktree`, `/move`, and the `--worktree` flag no longer require enabling experimental mode — they are available to everyone by default.
 
 The `/new-worktree` command *(v1.0.78+, experimental)* creates a new worktree and starts a **fresh conversation** in it — without inheriting the current session's history. This is useful when you want a completely clean slate for a new task in a parallel branch:
 
@@ -830,6 +840,8 @@ copilot --no-sandbox -p "Set up development environment with system tools"
 ```
 
 These flags apply only to the current invocation — your persisted sandbox preference remains unchanged.
+
+> **New (v1.0.84+)**: When your organization's policy allows a bypass, `/sandbox disable` turns the sandbox off for the rest of the current session — a quicker alternative to relaunching with `--no-sandbox`.
 
 **`allowDevToolAccess` sandbox setting** *(v1.0.78+ as `allowDevToolCaches`, renamed to `allowDevToolAccess` in v1.0.79 — breaking change)*: When the sandbox is enabled, this setting grants sandboxed builds access to toolchain caches, registries, config files, and installs (npm cache, pip cache, Go module cache, etc.) so builds work without extra setup. Set it to `false` in `/settings` to opt out if you want a stricter sandbox that blocks all toolchain access.
 
