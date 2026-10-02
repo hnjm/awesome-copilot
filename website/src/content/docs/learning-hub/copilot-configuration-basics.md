@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-10-02
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -786,6 +786,8 @@ gh copilot --effort high "Refactor the authentication module"
 ```
 
 Accepted values are `low`, `medium`, and `high`. You can also set a default via the `effortLevel` config setting.
+
+*(v1.0.90+)* Use `--mcp-github-auth` to scope your GitHub account authentication to approved MCP server origins only, rather than every MCP server. *(v1.0.89+)* The CLI also offers new models such as GPT-6 Sol, GPT-6 Luna, and Claude Opus 5.5 in the model picker when available, and `/model` autocompletes model IDs.
 
 ### CLI Startup Flags
 
