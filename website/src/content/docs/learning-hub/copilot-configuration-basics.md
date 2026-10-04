@@ -443,9 +443,15 @@ In addition to the main config file, GitHub Copilot CLI reads two optional per-p
 - `.claude/settings.json` — committed project settings
 - `.claude/settings.local.json` — local overrides (add to `.gitignore` for personal adjustments)
 
+> **Claude Code rule files (v1.0.89+)**: Rule files in `.claude/rules` are now loaded as custom instructions, so repositories that already keep Claude Code rules there work with Copilot CLI without duplication.
+
 These files follow the same format as `config.json` and are loaded after the global config, so they can tailor CLI behaviour—including hook definitions—per repository without touching `.github/`.
 
 > **Important (v1.0.36+)**: Custom agents, skills, and commands placed in `~/.claude/` (the Claude Code user directory) are **no longer loaded** by GitHub Copilot CLI. Only `~/.claude/settings.json` is read for configuration. If you previously stored personal agents or skills in `~/.claude/`, move them to the supported locations: `~/.copilot/agents/` for user-level agents, `~/.copilot/skills/` or `~/.agents/skills/` for personal skills, or `.github/agents/` and `.github/skills/` in your repositories for project-level customizations.
+
+> **Scoped MCP GitHub auth (v1.0.90+)**: Start the CLI with `--mcp-github-auth` to limit your GitHub account authentication to approved MCP server origins instead of sharing it with every server.
+
+> **Sandbox CA management (v1.0.91+)**: `copilot sandbox ca` commands check, create, trust, rotate, and remove the proxy CA trust used by sandboxed sessions. The former `/sandbox ca install` is now split into `create` and `trust`.
 
 ### Model Picker
 
