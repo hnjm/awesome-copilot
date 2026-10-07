@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-10-07
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -830,6 +830,16 @@ copilot --no-sandbox -p "Set up development environment with system tools"
 ```
 
 These flags apply only to the current invocation — your persisted sandbox preference remains unchanged.
+
+**Sandbox availability and network allowlists** *(v1.0.93+)*: Command sandboxing is available to all users via `/sandbox` and `--sandbox`. Sandbox local-network allowlists now include `localhost` and loopback hosts, so local dev servers and test databases are reachable from sandboxed commands.
+
+**User settings location** *(v1.0.93+, breaking change)*: User settings are read only from `~/.copilot/settings.json`. User-setting keys left in `~/.copilot/config.json` are ignored, so move any such keys to `settings.json`.
+
+**Other v1.0.93 configuration changes**:
+
+- MCP server configuration changes apply between turns without restarting the session.
+- `--context long_context` is honored at startup, and `/context` shows the accurate context allowance.
+- Enterprises can set `permissions.limitTo` to enforce managed domain boundaries for network requests.
 
 **`allowDevToolAccess` sandbox setting** *(v1.0.78+ as `allowDevToolCaches`, renamed to `allowDevToolAccess` in v1.0.79 — breaking change)*: When the sandbox is enabled, this setting grants sandboxed builds access to toolchain caches, registries, config files, and installs (npm cache, pip cache, Go module cache, etc.) so builds work without extra setup. Set it to `false` in `/settings` to opt out if you want a stricter sandbox that blocks all toolchain access.
 
