@@ -661,7 +661,7 @@ A: There are several supported locations, loaded in order of precedence:
 - **Repository-level** (shared with team): `.github/hooks/*.json` in your repository — all JSON files in this folder are loaded automatically
 - **Claude/Copilot project settings**: `.claude/settings.json` and `.claude/settings.local.json` — hooks defined here are applied to the current repository without committing them to `.github/`
 - **Global settings**: `settings.json` or `settings.local.json` (user-level CLI config)
-- **Legacy config**: `config.json` (hooks are still read; note that from v1.0.93 user-setting keys in `~/.copilot/config.json` are ignored in favor of `settings.json`)
+- **Legacy config**: `config.json` (also supported; note that from v1.0.93 user-setting keys in `~/.copilot/config.json` are ignored in favor of `settings.json`)
 
 For team-wide hooks that everyone should use, `.github/hooks/` is the recommended location as it is version-controlled and shared automatically.
 
