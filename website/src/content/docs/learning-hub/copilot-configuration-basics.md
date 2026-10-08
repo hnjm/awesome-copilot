@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-10-08
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -479,6 +479,10 @@ The `/settings` command (v1.0.61+) opens an interactive dialog to browse and edi
 
 The settings dialog supports search — type to filter settings by name. Changes take effect immediately.
 
+**`copilot config` subcommands** *(v1.0.92+)*: Manage settings from the shell without opening a session — list, read, set, and remove individual settings. As of v1.0.93, user settings are read only from `~/.copilot/settings.json`; user-setting keys left in `~/.copilot/config.json` are ignored, so move them if you haven't already.
+
+**Enterprise managed settings** *(v1.0.93–v1.0.94)*: Administrators can enforce `permissions.limitTo` to restrict network requests to managed domains, and can disable Assisted Permissions so sessions stay in Manual Approval mode. The CLI shows a policy warning when startup bypass-permission flags are suppressed by managed settings.
+
 *(v1.0.70+)* The `/settings` command and the `/model` command both support **`--repo` and `--local` flags** for explicitly scoping which layer of settings you want to view or edit:
 
 ```
@@ -830,6 +834,8 @@ copilot --no-sandbox -p "Set up development environment with system tools"
 ```
 
 These flags apply only to the current invocation — your persisted sandbox preference remains unchanged.
+
+As of v1.0.93, command sandboxing is available to all users via `/sandbox` and `--sandbox`. Sandboxed shells withhold the ambient `GITHUB_TOKEN` unless you explicitly configure it (v1.0.92+).
 
 **`allowDevToolAccess` sandbox setting** *(v1.0.78+ as `allowDevToolCaches`, renamed to `allowDevToolAccess` in v1.0.79 — breaking change)*: When the sandbox is enabled, this setting grants sandboxed builds access to toolchain caches, registries, config files, and installs (npm cache, pip cache, Go module cache, etc.) so builds work without extra setup. Set it to `false` in `/settings` to opt out if you want a stricter sandbox that blocks all toolchain access.
 
