@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-10-09
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -457,7 +457,7 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 
 **Auto mode and server-side model routing** (v1.0.43+): When you select **Auto** as your model, the CLI uses server-side model routing for real-time model selection. Instead of locking in a single model at session start, Auto mode evaluates each request and routes it to the most appropriate model dynamically. This means straightforward questions can be handled by a faster model while complex reasoning tasks are automatically escalated — without you needing to switch models manually.
 
-**Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, **Grok 4.5** (v1.0.76+) from xAI, and **Gemini 3.7 Flash** (v1.0.81+). **Grok 4.6** (v1.0.81+) also gains support for the `xhigh` reasoning effort level, one step above `high`, for the most demanding reasoning tasks.
+**Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, **Grok 4.5** (v1.0.76+) from xAI, and **Gemini 3.7 Flash** (v1.0.81+). **Claude Haiku 5.5** (v1.0.94+) was added to model selection and `--model` completions, and the v1.0.93 model picker now recommends GPT-6.1 Sol, GPT-6 Astra/Luna, and Claude 5.5 models. **Grok 4.6** (v1.0.81+) also gains support for the `xhigh` reasoning effort level, one step above `high`, for the most demanding reasoning tasks.
 
 **Plan mode model** *(v1.0.74+)*: When using plan mode (which blocks file mutations and keeps changes in a planning phase), you can assign a *separate* model specifically for planning — different from your regular session model. This lets you use a fast, cost-effective model for plan drafting while keeping a more capable model on standby for the implementation phase:
 
@@ -836,6 +836,14 @@ These flags apply only to the current invocation — your persisted sandbox pref
 > **Breaking change (v1.0.79)**: The setting was renamed from `allowDevToolCaches` to `allowDevToolAccess`. If you previously set `allowDevToolCaches` to `false` to opt out, update your `settings.json` to use `allowDevToolAccess` — the old key is silently ignored.
 
 **Sandbox auth settings** *(v1.0.79-8+, breaking change)*: The `/sandbox` configuration dialog now groups git, `gh`, and (on macOS) keychain settings under a new **Auth** tab. The underlying settings keys moved from `sandbox.gitAuth`/`sandbox.ghAuth` to `sandbox.auth.git`/`sandbox.auth.gh`. There is no automatic migration — the old keys are silently ignored in settings files, and SDK requests that still send them are rejected as invalid. Update any saved configuration to the new key names.
+
+**Sandbox for all users** *(v1.0.93+)*: Command sandboxing is now available to all users through `/sandbox` and `--sandbox`. Enterprise admins can also enforce managed domain boundaries for network requests with the `permissions.limitTo` policy. Sandboxed shells withhold the ambient `GITHUB_TOKEN` unless you explicitly configure it (v1.0.92+), and `copilot config` accepts sandbox credential `injectHosts` keys (v1.0.95+).
+
+**`copilot config` subcommands** *(v1.0.92+)*: Manage settings from the command line instead of editing JSON by hand — list, read, set, and remove individual settings. Since v1.0.93, user settings are read only from `~/.copilot/settings.json`; user-setting keys left in `~/.copilot/config.json` are ignored, so move any remaining keys across.
+
+**Environment picker** *(v1.0.92+)*: Press **Ctrl+E** before starting a conversation to choose between a local run and a cloud run.
+
+**Live MCP configuration changes** *(v1.0.93+)*: Changes to MCP server configuration apply between turns without restarting the session, and `copilot mcp add` recovers cleanly if a previous config initialization was interrupted (v1.0.94+).
 
 **`worktreeBaseRef` setting** *(v1.0.79-8+)*: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three now default to `HEAD`; previously `--worktree` defaulted to starting from the remote default branch. Set this in `/settings` if you want worktrees to branch from the remote default instead.
 
