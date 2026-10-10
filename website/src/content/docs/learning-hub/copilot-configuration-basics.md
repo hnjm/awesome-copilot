@@ -837,6 +837,14 @@ These flags apply only to the current invocation — your persisted sandbox pref
 
 **Sandbox auth settings** *(v1.0.79-8+, breaking change)*: The `/sandbox` configuration dialog now groups git, `gh`, and (on macOS) keychain settings under a new **Auth** tab. The underlying settings keys moved from `sandbox.gitAuth`/`sandbox.ghAuth` to `sandbox.auth.git`/`sandbox.auth.gh`. There is no automatic migration — the old keys are silently ignored in settings files, and SDK requests that still send them are rejected as invalid. Update any saved configuration to the new key names.
 
+**Sandbox for everyone** *(v1.0.93+)*: Command sandboxing is now available to all users through `/sandbox` and `--sandbox`. Sandboxed shells withhold the ambient `GITHUB_TOKEN` unless you explicitly configure it *(v1.0.92+)*, and local-network allowlists include localhost and loopback hosts. Use `copilot sandbox ca` commands *(v1.0.91+)* to check, create, trust, rotate, and remove the proxy CA trust the sandbox uses.
+
+**`copilot config` subcommands** *(v1.0.92+)*: List, read, set, and remove settings from the command line instead of editing files by hand. As of v1.0.93, user settings are read only from `~/.copilot/settings.json`; user-setting keys left in `~/.copilot/config.json` are ignored, so move them over.
+
+**Context tier and MCP auth flags** *(v1.0.90+)*: `--context long_context` is honored at startup (and by new and resumed ACP sessions as of v1.0.95), and `/context` shows the real allowance. `--mcp-github-auth` scopes your GitHub account auth to approved MCP server origins. MCP configuration changes now apply between turns without restarting the session *(v1.0.93+)*.
+
+**Claude Code rule files** *(v1.0.89+)*: Files in `.claude/rules` are loaded as custom instructions, so repositories shared with Claude Code need no duplicate instruction files.
+
 **`worktreeBaseRef` setting** *(v1.0.79-8+)*: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three now default to `HEAD`; previously `--worktree` defaulted to starting from the remote default branch. Set this in `/settings` if you want worktrees to branch from the remote default instead.
 
 The `--attachment` flag (available in prompt mode, `-p`) lets you attach files — images or native documents — to the initial prompt in non-interactive mode:
