@@ -837,6 +837,12 @@ These flags apply only to the current invocation — your persisted sandbox pref
 
 **Sandbox auth settings** *(v1.0.79-8+, breaking change)*: The `/sandbox` configuration dialog now groups git, `gh`, and (on macOS) keychain settings under a new **Auth** tab. The underlying settings keys moved from `sandbox.gitAuth`/`sandbox.ghAuth` to `sandbox.auth.git`/`sandbox.auth.gh`. There is no automatic migration — the old keys are silently ignored in settings files, and SDK requests that still send them are rejected as invalid. Update any saved configuration to the new key names.
 
+**Sandbox availability and recent sandbox changes** *(v1.0.92–v1.0.96)*: Command sandboxing is now available to all users via `/sandbox` and `--sandbox` (v1.0.93). Sandboxed shells withhold the ambient `GITHUB_TOKEN` unless you explicitly configure it (v1.0.92), local-network allowlists include localhost and loopback hosts (v1.0.93), `/add-dir` grants sandbox access to the added directory for the current session, and the interactive sandbox settings suggest possible environment secrets and let you add masking hosts before saving (v1.0.96).
+
+**`copilot config` subcommands** *(v1.0.92+)*: List, read, set, and remove settings from the command line without opening `/settings`. User settings are read only from `~/.copilot/settings.json` (v1.0.93); user-setting keys left in `~/.copilot/config.json` are ignored, so move them if you have not already.
+
+**Permissions visibility and enterprise controls** *(v1.0.93–v1.0.96)*: The timeline shows whether you, Assisted Permissions, policy, or an unattended fallback made each permission decision. Enterprises can enforce managed domain boundaries with `permissions.limitTo` and can disable Assisted Permissions to keep sessions in Manual Approval mode.
+
 **`worktreeBaseRef` setting** *(v1.0.79-8+)*: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three now default to `HEAD`; previously `--worktree` defaulted to starting from the remote default branch. Set this in `/settings` if you want worktrees to branch from the remote default instead.
 
 The `--attachment` flag (available in prompt mode, `-p`) lets you attach files — images or native documents — to the initial prompt in non-interactive mode:
