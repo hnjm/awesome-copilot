@@ -3,7 +3,7 @@ title: 'Defining Custom Instructions'
 description: 'Learn how to create persistent, context-aware instructions that guide GitHub Copilot automatically across your codebase.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-07-01
+lastUpdated: 2026-10-19
 estimatedReadingTime: '8 minutes'
 tags:
   - instructions
@@ -111,6 +111,8 @@ applyTo:
   - '**/*.ts'
   - '**/*.tsx'
 ```
+
+> **CLI note (v1.0.100+)**: Path-specific instruction files in the repository's `.github/instructions` folder are applied automatically when the agent reads or edits a matching file.
 
 ### Common Scoping Patterns
 
