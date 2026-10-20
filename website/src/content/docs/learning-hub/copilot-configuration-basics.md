@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-10-20
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -639,7 +639,9 @@ The `/share html` command exports the current session — including conversation
 /share html
 ```
 
-The exported file contains everything needed to view the session without a network connection and can be shared with teammates or stored for later reference. This complements `/share` (which shares via URL) for cases where an offline or attached format is preferred.
+The exported file contains everything needed to view the session without a network connection and can be shared with teammates or stored for later reference. This complements `/share` (which shares via URL) for cases where an offline or attached format is preferred. Running `/share` with no arguments *(v1.0.100+)* opens a full-screen action menu for sharing the current session.
+
+For one-off non-interactive runs, `--trust-folder` *(v1.0.100+)* trusts the current folder for prompt-mode sessions started with `-p` or piped stdin, and `--disable-client-telemetry` turns off client telemetry uploads. In Assisted permissions mode, the `assistedApprovalInstructions` setting *(v1.0.101+)* lets you guide how confirmation decisions are made.
 
 The `/chronicle` command opens an interactive timeline of everything the agent has done in the current session. It shows file changes, tool calls, and conversation turns in chronological order, letting you review the full arc of the session at a glance:
 

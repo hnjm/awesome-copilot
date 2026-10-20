@@ -3,7 +3,7 @@ title: 'Installing and Using Plugins'
 description: 'Learn how to find, install, and manage plugins that extend GitHub Copilot CLI with reusable agents, skills, hooks, and integrations.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-10-20
 relatedArticles:
   - ./building-custom-agents.md
   - ./creating-effective-skills.md
@@ -212,6 +212,16 @@ Or from an interactive session:
 ```
 
 > **Deprecation notice**: Installing plugins directly from a GitHub repository URL, raw URL, or local file path (e.g., `copilot plugin install github/awesome-copilot`) is deprecated and will be removed in a future release. Use marketplace-based installation instead.
+
+### From a GitHub Install Link
+
+Verified skills and plugins can also be installed from a GitHub install link *(v1.0.100+)*:
+
+```bash
+copilot plugin install "ghapp://air/install?..."
+```
+
+Use the full link provided by the GitHub install page, quoted so your shell doesn't interpret the query string.
 
 ### From VS Code
 
