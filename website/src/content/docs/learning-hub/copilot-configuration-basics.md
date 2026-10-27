@@ -779,6 +779,8 @@ The `/permissions` command *(v1.0.78+)* opens an interactive picker for switchin
 
 Use `/permissions` as a quick mode switcher when you want to change how the agent handles tool approvals without remembering individual command names.
 
+> **Assisted Permissions (v1.0.104+)**: Assisted Permissions, where a judge model helps decide whether to approve tool calls, no longer requires experimental mode. Use the `assistedApprovalInstructions` setting *(v1.0.101+)* to give the judge guidance on how to make confirmation decisions. See the [Copilot CLI changelog](https://github.com/github/copilot-cli/blob/main/changelog.md).
+
 The `--effort` flag (shorthand for `--reasoning-effort`) controls how much computational reasoning the model applies to a request:
 
 ```bash
