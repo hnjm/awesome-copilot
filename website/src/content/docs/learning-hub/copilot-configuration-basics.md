@@ -431,6 +431,8 @@ CLI settings use **camelCase** naming. Key settings added in recent releases:
 | `stayInAutopilot` | Keep the CLI in autopilot mode after an autopilot task completes, instead of returning to interactive mode (v1.0.69+) |
 | `defaultMode` | Startup mode for new interactive sessions (e.g., `interactive`, `autopilot`, `plan`) (v1.0.81+) |
 | `defaultPermissionMode` | Default approval behaviour for new interactive sessions, independent from `defaultMode` (v1.0.81+) |
+| `assistedApprovalInstructions` | Custom guidance for the Assisted Permissions judge when it decides whether to confirm a tool request (v1.0.101+) |
+| `fusionTier` | Tier applied when the managed "fusion" model is used (v1.0.104+) |
 
 > **Note**: Older snake_case names (e.g., `include_gitignored`, `auto_updates_channel`) are still accepted for backward compatibility, but camelCase is now the preferred format.
 
@@ -468,6 +470,8 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 ```
 
 When you leave plan mode, the CLI automatically reverts to your session model. This pairing works well with repository model pinning — you can enforce a high-quality model for implementation while allowing a lighter model during exploration and planning.
+
+**Copilot Fusion** *(v1.0.104+)*: The managed `fusion` model starts sessions on Auto and applies your `fusionTier` setting. You can pick Fusion High or Max from `/model`, including from long-context sessions (v1.0.105+).
 
 ### CLI Session Commands
 
@@ -766,6 +770,8 @@ The `/autopilot` command (v1.0.45+) is a quick in-session toggle that switches b
 Use `/autopilot` when you want to flip between supervised and unsupervised operation mid-session without typing out the full `/allow-all on` or `/allow-all off` commands.
 
 > **Enhanced autopilot (v1.0.64+)**: When autopilot mode is active — including when launched with `--autopilot` at startup or during automatic continuation turns — the agent automatically handles elicitation dialogs, `ask_user` prompts, sampling requests, and permission prompts without surfacing them as interactive dialogs. This means long-running automated sessions can proceed end-to-end without manual confirmation steps.
+
+> **Assisted Permissions (v1.0.104+)**: Assisted Permissions no longer require experimental mode. Use the `assistedApprovalInstructions` setting (v1.0.101+) to steer the judge's confirmation decisions.
 
 > **Auto allow-all mode (v1.0.69+)**: In addition to the standard allow-all mode (which approves everything), the CLI now supports an **auto allow-all** mode that uses an LLM judge to evaluate each tool request. When enabled, the judge automatically approves requests it evaluates as acceptable, and asks you for manual confirmation only for requests it considers risky. This gives you a middle ground between full autopilot and fully supervised operation — most routine actions proceed automatically while unusual or potentially dangerous actions still surface for your review. As of v1.0.69-3, this mode requires experimental features to be enabled — use `/experimental on` or start the CLI with `--experimental` — then activate it with `/allow-all auto`. The previous `AUTO_APPROVAL` environment variable approach has been removed in favour of experimental mode.
 

@@ -235,6 +235,8 @@ copilot plugin marketplace update
 copilot plugin uninstall my-plugin
 ```
 
+> **Marketplace sources** *(v1.0.102+)*: Plugin marketplaces accept `git-subdir` sources and long plugin descriptions. Team-assigned plugins can also be installed from Team-defined GitHub marketplaces (v1.0.101+).
+
 > **Auto-update for first-party plugins** *(v1.0.78+)*: Plugins sourced from the official `copilot-plugins` marketplace automatically update to their latest version at the start of each session. You do not need to run `copilot plugin update` for first-party plugins — updates are applied silently on startup. Community plugins from `awesome-copilot` and other marketplace registries still require a manual `copilot plugin update` command.
 
 ### Enabling and Disabling Plugin Components
