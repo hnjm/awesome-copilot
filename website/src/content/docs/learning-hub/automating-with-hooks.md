@@ -425,7 +425,9 @@ The output fields are:
 
 This enables sophisticated patterns like normalizing file paths, enforcing naming conventions, adding required flags, or surfacing policy context—without blocking the tool entirely.
 
-> **Note**: Both `modifiedArgs` and `updatedInput` are accepted field names for the replacement arguments (for cross-tool compatibility).
+> **Note**: Both `modifiedArgs` and `updatedInput` are accepted field names for the replacement arguments (for cross-tool compatibility). Returning `"modifiedArgs": null` leaves the arguments unchanged.
+
+> **Tip**: Command hooks receive a `COPILOT_HOOK_DEPTH` environment variable. If a hook launches another Copilot session, check it to stop recursive `agentStop` chains.
 
 ### Governance Audit
 
