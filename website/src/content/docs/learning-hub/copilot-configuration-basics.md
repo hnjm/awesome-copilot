@@ -477,7 +477,9 @@ The `/settings` command (v1.0.61+) opens an interactive dialog to browse and edi
 /settings
 ```
 
-The settings dialog supports search — type to filter settings by name. Changes take effect immediately.
+The settings dialog supports search — type to filter settings by name. Changes take effect immediately. *(v1.0.106+)* `/settings` opens the unified dashboard for all users, and its search covers both settings and local resources.
+
+*(v1.0.106+)* Related additions: the `/code` command opens the current session in VS Code, and the `COPILOT_SESSION_CWD` environment variable is available when launching and expanding LSP and local MCP server configs.
 
 *(v1.0.70+)* The `/settings` command and the `/model` command both support **`--repo` and `--local` flags** for explicitly scoping which layer of settings you want to view or edit:
 
