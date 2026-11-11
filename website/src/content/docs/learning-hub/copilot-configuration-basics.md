@@ -837,6 +837,10 @@ These flags apply only to the current invocation — your persisted sandbox pref
 
 **Sandbox auth settings** *(v1.0.79-8+, breaking change)*: The `/sandbox` configuration dialog now groups git, `gh`, and (on macOS) keychain settings under a new **Auth** tab. The underlying settings keys moved from `sandbox.gitAuth`/`sandbox.ghAuth` to `sandbox.auth.git`/`sandbox.auth.gh`. There is no automatic migration — the old keys are silently ignored in settings files, and SDK requests that still send them are rejected as invalid. Update any saved configuration to the new key names.
 
+**Sandbox network rules with CIDR ranges** *(v1.0.109+)*: Sandbox host allow and deny rules in settings now accept IPv4 and IPv6 CIDR ranges (for example `10.0.0.0/8`), so you can permit or block whole address ranges without listing each host.
+
+**`/init` guidance** *(v1.0.109+)*: Text typed after `/init` is now passed to the model as extra guidance for the generated instructions file (for example, `/init focus on testing conventions`). Use `/init suppress` to skip generation.
+
 **`worktreeBaseRef` setting** *(v1.0.79-8+)*: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three now default to `HEAD`; previously `--worktree` defaulted to starting from the remote default branch. Set this in `/settings` if you want worktrees to branch from the remote default instead.
 
 The `--attachment` flag (available in prompt mode, `-p`) lets you attach files — images or native documents — to the initial prompt in non-interactive mode:
