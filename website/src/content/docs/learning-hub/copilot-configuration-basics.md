@@ -835,6 +835,8 @@ These flags apply only to the current invocation — your persisted sandbox pref
 
 > **Breaking change (v1.0.79)**: The setting was renamed from `allowDevToolCaches` to `allowDevToolAccess`. If you previously set `allowDevToolCaches` to `false` to opt out, update your `settings.json` to use `allowDevToolAccess` — the old key is silently ignored.
 
+**Sandbox host rules**: Sandbox host allow and deny rules in settings accept IPv4 and IPv6 CIDR ranges (for example `10.0.0.0/8`) as well as hostnames. On macOS, sandbox host rules block direct TCP connections to local ports, such as a build client reaching its daemon; localhost stays reachable only through the local proxy, as HTTP or a CONNECT tunnel from a proxy-aware client. Run `copilot help sandbox` for details.
+
 **Sandbox auth settings** *(v1.0.79-8+, breaking change)*: The `/sandbox` configuration dialog now groups git, `gh`, and (on macOS) keychain settings under a new **Auth** tab. The underlying settings keys moved from `sandbox.gitAuth`/`sandbox.ghAuth` to `sandbox.auth.git`/`sandbox.auth.gh`. There is no automatic migration — the old keys are silently ignored in settings files, and SDK requests that still send them are rejected as invalid. Update any saved configuration to the new key names.
 
 **`worktreeBaseRef` setting** *(v1.0.79-8+)*: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three now default to `HEAD`; previously `--worktree` defaulted to starting from the remote default branch. Set this in `/settings` if you want worktrees to branch from the remote default instead.
