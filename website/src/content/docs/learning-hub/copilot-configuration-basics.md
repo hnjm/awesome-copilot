@@ -822,6 +822,12 @@ copilot --autopilot --max-autopilot-continues 10 "Refactor the authentication mo
 
 Set it higher for long-running tasks, or lower for tasks where you want more frequent checkpoints. Setting it to `0` disables automatic continuation entirely.
 
+The `--max-ai-credits` flag sets a session-wide AI credit limit. As of v1.0.112, subagents respect this limit too, and resuming a session counts the credits it already used toward the limit.
+
+The `--host-allow-session-creation` flag *(v1.0.111+)* lets remote clients create sessions on a CLI host for a single launch, without changing your saved settings.
+
+Enterprise administrators can use regular expressions in managed Shell, Bash, and PowerShell permission rules (v1.0.111+), and can disable the built-in Browser Use tool with the managed setting `features.browserUse` (v1.0.113+).
+
 The `--sandbox` and `--no-sandbox` flags *(v1.0.70+)* turn the OS-level shell sandbox on or off for the current session only, without permanently changing your saved sandbox setting. This is useful with `-p` (prompt mode) when you need to temporarily adjust sandbox behavior for a specific automated task:
 
 ```bash
